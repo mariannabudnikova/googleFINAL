@@ -17,14 +17,13 @@ public class CodeToStringConverter {
 			if (i == commands.size() - 1 || command.getDirection() != commands.get(i + 1).getDirection())
 				toShow = command.toString() + "\r\n";
 			else {
-				int n = 1;
-				while ((i != commands.size() - 1)
-						&& (command.getDirection() == commands.get(i)
-								.getDirection())) {
+				int n = 0;
+				while ((i != commands.size() - 1) && (command.getDirection() == commands.get(i).getDirection())) {
 					n++;
 					i++;
 				}
-				toShow = "for(int i = 1; i <= " + n + "; i++)"
+				i--;
+				toShow = "for(int i = 0; i < " + n + "; i++)"
 						+ command.toString() + "\r\n";
 			}
 

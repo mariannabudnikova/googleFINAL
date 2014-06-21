@@ -31,13 +31,21 @@ public class GameLoopThread extends Thread {
                  try {
                         c = view.getHolder().lockCanvas();
                         
+                    	performTheDrawings(c);
                         
+                    	try {
+							sleep(50);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+                    	
+                    	checkIfWon();
                         if (view.isRunningCommands){
                         	runNextCommand();
                         }
                         
-                    	checkIfWon();;
-                    	performTheDrawings(c);
+                    	
                        
                  } finally {
                         if (c != null) {

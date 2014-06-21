@@ -111,10 +111,8 @@ public class GameView extends SurfaceView {
 		while (iter.hasNext()) {
 			ScreenConstants screenConstants = ScreenConstants.get(context);
 			MoveCommand command = iter.next();
-			Bitmap commandBitmap = BitmapFactory.decodeResource(getResources(),
-					command.getIcon());
-			canvas.drawBitmap(commandBitmap, screenConstants.MARGIN, screenConstants.GAME_SCREEN_HEIGHT
-							+ commandOffset, null);
+			Bitmap commandBitmap = BitmapFactory.decodeResource(getResources(), command.getIcon());
+			canvas.drawBitmap(commandBitmap, screenConstants.MARGIN, screenConstants.GAME_SCREEN_HEIGHT + commandOffset, null);
 			commandOffset += screenConstants.COMMAND_BUTTON_HEIGHT + screenConstants.COMMAND_OFFSET;
 		}
 
@@ -130,8 +128,7 @@ public class GameView extends SurfaceView {
 	public void drawGoal(Canvas canvas) {
 		Bitmap runBitmap = BitmapFactory.decodeResource(getResources(),
 				Icons.GOAL_ICON);
-		canvas.drawBitmap(runBitmap, screenConstants.GOAL_POSITION_X,
-				screenConstants.GOAL_POSITION_Y, null);
+		canvas.drawBitmap(runBitmap, screenConstants.GOAL_POSITION_X, screenConstants.GOAL_POSITION_Y, null);
 	}
 	
 	public void drawVictoryScreen(Canvas canvas){
