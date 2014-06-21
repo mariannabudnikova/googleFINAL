@@ -27,6 +27,8 @@ public class GameView extends SurfaceView {
 	boolean gameStarted = false;
 	boolean isRunningCommands = false;
 	boolean gameOver = false;
+	
+	int currentlyExecutingCommand = -1;
 
 	public GameView(Context context) {
 		super(context);
@@ -108,12 +110,21 @@ public class GameView extends SurfaceView {
 		Iterator<MoveCommand> iter = MoveCommands.getCommands()
 				.getCommandIterator();
 		int commandOffset = screenConstants.COMMAND_OFFSET + screenConstants.MARGIN;
+		int commandIndex = 0;
 		while (iter.hasNext()) {
 			ScreenConstants screenConstants = ScreenConstants.get(context);
 			MoveCommand command = iter.next();
-			Bitmap commandBitmap = BitmapFactory.decodeResource(getResources(), command.getIcon());
+			
+			Bitmap commandBitmap;
+			if (commandIndex == currentlyExecutingCommand){
+				commandBitmap = BitmapFactory.decodeResource(getResources(), command.getHighlightedIcon());
+			}
+			else{
+				commandBitmap = BitmapFactory.decodeResource(getResources(), command.getIcon());
+			}
 			canvas.drawBitmap(commandBitmap, screenConstants.MARGIN, screenConstants.GAME_SCREEN_HEIGHT + commandOffset, null);
 			commandOffset += screenConstants.COMMAND_BUTTON_HEIGHT + screenConstants.COMMAND_OFFSET;
+			commandIndex ++;
 		}
 
 	}

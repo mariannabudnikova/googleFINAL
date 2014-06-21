@@ -12,33 +12,42 @@ public class MoveCommand {
 	
 	private MoveDirection moveDirection;
 	private int icon;
+	private int highLightedIcon;
 	
 	public MoveCommand(MoveDirection moveDirection){
 		this.moveDirection = moveDirection;
-		setIcon();
+		setIcons();
 	}
 	
 	public int getIcon(){
 		return icon;
 	}
 	
+	public int getHighlightedIcon(){
+		return highLightedIcon;
+	}
+	
 	public MoveDirection getDirection(){
 		return moveDirection;
 	}
 	
-	private void setIcon(){
+	private void setIcons(){
 		switch(moveDirection){
 		case UP:
 			icon = Icons.UP_ICON;
+			highLightedIcon = Icons.UP_ICON_HIGHLIGHT;
 			break;
 		case DOWN:
 			icon = Icons.DOWN_ICON;
+			highLightedIcon = Icons.DOWN_ICON_HIGHLIGHT;
 			break;
 		case RIGHT:
 			icon = Icons.RIGHT_ICON;
+			highLightedIcon = Icons.RIGHT_ICON_HIGHLIGHT;
 			break;
 		case LEFT:
 			icon = Icons.LEFT_ICON;
+			highLightedIcon = Icons.LEFT_ICON_HIGHLIGHT;
 			break;
 			
 		}

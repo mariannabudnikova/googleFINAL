@@ -4,10 +4,9 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 public class GameLoopThread extends Thread {
-    static long FPS = 5;
+    static long FPS = 4;
     private GameView view;
     private boolean running = false;
-    int currentlyExecutingCommand = 0;
     Context context;
    
     public GameLoopThread(GameView view, Context context) {
@@ -72,15 +71,15 @@ public class GameLoopThread extends Thread {
     public void runNextCommand(){
     	MoveCommands commands = MoveCommands.getCommands();
     	int numberOfCommands = commands.getNumberOfCommands();
-    	
-    	if (currentlyExecutingCommand>=numberOfCommands){
+    	view.currentlyExecutingCommand ++;
+    	if (view.currentlyExecutingCommand>=numberOfCommands){
     		view.isRunningCommands = false;
     		return;
     	}
-    	MoveCommand command = commands.getMoveCommandAtIndex(currentlyExecutingCommand);
+    	MoveCommand command = commands.getMoveCommandAtIndex(view.currentlyExecutingCommand);
     	Alien alien = Alien.get(context);
     	alien.executeCommand(command);
-    	currentlyExecutingCommand ++;
+    	
     	
     }
     
