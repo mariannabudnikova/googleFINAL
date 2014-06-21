@@ -45,10 +45,25 @@ public class MoveCommand {
 		
 			
 	}
-
 	
 	public MoveDirection getMoveDirection(){
 		return moveDirection;
+	}
+	
+	public String toString(){
+		
+		switch(moveDirection){
+		case UP:
+			return "moveUp();";
+		case DOWN:
+			return "moveDown();";
+		case RIGHT:
+			return "moveRight();";
+		case LEFT:
+			return "moveLeft();";
+			
+		}
+		return "";
 	}
 }
 

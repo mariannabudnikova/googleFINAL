@@ -20,6 +20,10 @@ public class MoveCommands {
 		moveCommands = new LinkedList<MoveCommand>();
 	}
 	
+	public LinkedList<MoveCommand> getMoveCommandList(){
+		return moveCommands;
+	}
+	
 	public void addCommand(MoveCommand command){
 		moveCommands.add(command);
 	}

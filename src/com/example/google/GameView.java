@@ -1,5 +1,6 @@
 package com.example.google;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import android.annotation.SuppressLint;
@@ -8,6 +9,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -75,8 +78,10 @@ public class GameView extends SurfaceView {
 		drawRunButton(canvas);
 		drawGoal(canvas);
 		drawAlien(canvas);
-		if (gameOver)
+		if (gameOver){
 			drawVictoryScreen(canvas);
+			drawCode(canvas);
+		}
 	}
 	
 	public void drawLaunchScreen(Canvas canvas){
@@ -130,10 +135,26 @@ public class GameView extends SurfaceView {
 	}
 	
 	public void drawVictoryScreen(Canvas canvas){
-		Bitmap runBitmap = BitmapFactory.decodeResource(getResources(),
-				Icons.GAME_OVER);
-		canvas.drawBitmap(runBitmap, screenConstants.VICTORY_SCREEN_POSITION_X,
-				screenConstants.VICTORY_SCREEN_POSITION_Y, null);
+		Bitmap runBitmap = BitmapFactory.decodeResource(getResources(), Icons.GAME_OVER);
+		canvas.drawBitmap(runBitmap, screenConstants.VICTORY_SCREEN_POSITION_X, screenConstants.VICTORY_SCREEN_POSITION_Y, null);
+	}
+	
+	
+	public void drawCode(Canvas canvas){
+		MoveCommands commands = MoveCommands.getCommands();
+		CodeToStringConverter codeToStr = new CodeToStringConverter();
+		ArrayList<String> code = codeToStr.convertCodeToString(commands);
+		
+		Paint paint = new Paint();
+		paint.setColor(Color.BLACK);
+		int font = 40;
+		int lineHeight = 415 + font;
+		
+		paint.setTextSize(font);
+		for (String codeLine: code){
+			canvas.drawText(codeLine, 42, lineHeight, paint);
+			lineHeight +=font*2;
+		}
 		
 	}
 
