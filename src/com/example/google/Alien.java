@@ -6,9 +6,6 @@ import android.view.Display;
 import android.view.WindowManager;
 
 public class Alien {
-
-	public static int INITIAL_POSITION_X = 10;
-	public static int INITIAL_POSITION_Y = 10;
 	
 	int icon;
 	private static Alien instance = null;
@@ -24,7 +21,7 @@ public class Alien {
 	public static Alien get(Context context){
 		if (instance == null){
 			
-			instance = new Alien(INITIAL_POSITION_X, INITIAL_POSITION_Y, context);
+			instance = new Alien(context);
 		}
 		return instance;
 	}
@@ -32,11 +29,12 @@ public class Alien {
 	
 
 	
-	private Alien (int x, int y, Context context){
+	private Alien (Context context){
 		this.context = context;
 		screenConstants = ScreenConstants.get(context);
-		xPosition =x;
-		yPosition =y;
+		BoundingBox box = screenConstants.get(context).alienBoudingBox;
+		xPosition =box.getBeginPositionX();
+		yPosition =box.getBeginPositionY();
 		icon=R.drawable.ic_launcher;
 		
 	}

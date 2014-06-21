@@ -4,7 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 public class GameLoopThread extends Thread {
-    static final long FPS = 10;
+    static final long FPS = 5;
     private GameView view;
     private boolean running = false;
     int currentlyExecutingCommand = 0;
@@ -30,12 +30,15 @@ public class GameLoopThread extends Thread {
                  startTime = System.currentTimeMillis();
                  try {
                         c = view.getHolder().lockCanvas();
+                        
+                        
                         if (view.isRunningCommands){
                         	runNextCommand();
                         }
-                        synchronized (view.getHolder()) {
-                               view.onDraw(c);
-                        }
+                        
+                    	checkIfWon();;
+                    	performTheDrawings(c);
+                       
                  } finally {
                         if (c != null) {
                                view.getHolder().unlockCanvasAndPost(c);
@@ -51,9 +54,17 @@ public class GameLoopThread extends Thread {
           }
     }
     
+    public void performTheDrawings(Canvas c){
+    	 synchronized (view.getHolder()) {
+             view.onDraw(c);
+      }
+    }
+    
+    
     public void runNextCommand(){
     	MoveCommands commands = MoveCommands.getCommands();
     	int numberOfCommands = commands.getNumberOfCommands();
+    	
     	if (currentlyExecutingCommand>=numberOfCommands){
     		view.isRunningCommands = false;
     		return;
@@ -62,6 +73,10 @@ public class GameLoopThread extends Thread {
     	Alien alien = Alien.get(context);
     	alien.executeCommand(command);
     	currentlyExecutingCommand ++;
+    	
+    }
+    
+    public void checkIfWon(){
     	
     }
 }

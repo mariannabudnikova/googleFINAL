@@ -98,7 +98,9 @@ public class GameView extends SurfaceView {
 			public boolean onTouch(View v, MotionEvent event) {
 				int xCoord = (int)event.getX();
 				int yCoord = (int)event.getY();
-				if (isWithinRunButton(xCoord, yCoord)){
+				
+				
+				if (isTapOnRunButton(xCoord, yCoord)){
 					System.out.println("clicked run button");
 					//run the code snippet
 					isRunningCommands = true;
@@ -108,13 +110,11 @@ public class GameView extends SurfaceView {
         });
     }
     
-    public boolean isWithinRunButton(int x, int y){
-    	return (x>=screenConstants.RUN_BUTTON_X 
-    			&& x <= screenConstants.RUN_BUTTON_X + screenConstants.RUN_BUTTON_WIDTH
-    			
-    			&& y >= screenConstants.RUN_BUTTON_Y 
-    			&& y <= screenConstants.RUN_BUTTON_Y + screenConstants.RUN_BUTTON_HEIGHT);
-
+    public boolean isTapOnRunButton(int x, int y){
+    	BoundingBox box = screenConstants.runButtonBoundingBox;
+    	return box.isWithinBox(x, y);
     }
+    
+
     
 }
