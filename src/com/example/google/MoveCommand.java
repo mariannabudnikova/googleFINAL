@@ -29,16 +29,16 @@ public class MoveCommand {
 	private void setIcon(){
 		switch(moveDirection){
 		case UP:
-			icon = R.drawable.ic_launcher;
+			icon = Icons.UP_ICON;
 			break;
 		case DOWN:
-			icon = R.drawable.ic_launcher;
+			icon = Icons.DOWN_ICON;
 			break;
 		case RIGHT:
-			icon = R.drawable.ic_launcher;
+			icon = Icons.RIGHT_ICON;
 			break;
 		case LEFT:
-			icon = R.drawable.ic_launcher;
+			icon = Icons.LEFT_ICON;
 			break;
 			
 		}

@@ -7,11 +7,9 @@ import android.view.WindowManager;
 
 public class Alien {
 	
-	int icon;
 	private static Alien instance = null;
 	
-	int xPosition;
-	int yPosition;
+	BoundingBox alienBox;
 	
 	ScreenConstants screenConstants;
 	
@@ -32,48 +30,44 @@ public class Alien {
 	private Alien (Context context){
 		this.context = context;
 		screenConstants = ScreenConstants.get(context);
-		BoundingBox box = screenConstants.get(context).alienBoudingBox;
-		xPosition =box.getBeginPositionX();
-		yPosition =box.getBeginPositionY();
-		icon=R.drawable.ic_launcher;
+		BoundingBox box = screenConstants.alienBoudingBox;
+		alienBox = box.clone();
 		
 	}
 	
 	public String toString(){
 		String str = "";
-		str +="x: " + xPosition + " y: " + yPosition;
+		str +="x: " + alienBox.getBeginPositionX() + " y: " + alienBox.getBeginPositionY();
 		return str;
 		
 	}
 	
-	public int getIcon(){
-		return icon;
-	}
-	
 	public void moveUp(int amount){
-		yPosition-=amount;
-		if (yPosition<0)
-			yPosition=0;
+		alienBox.decrementBeginPositionY(amount);
+		if (alienBox.getBeginPositionY()<0)
+			alienBox.setBeginPositionY(0);
 	}
 
 	public void moveDown(int amount){
-		yPosition+=amount;
-		if (yPosition>screenConstants.GAME_SCREEN_HEIGHT)
-			yPosition=screenConstants.GAME_SCREEN_HEIGHT;
+		alienBox.incrementBeginPositionY(amount);
+		if (alienBox.getBeginPositionY()>screenConstants.GAME_SCREEN_HEIGHT)
+			alienBox.setBeginPositionY(screenConstants.GAME_SCREEN_HEIGHT);
 	}
+	
 	
 	public void moveLeft(int amount){
-		xPosition-=amount;
-		if (xPosition<0)
-			xPosition=0;
+		alienBox.decrementBeginPositionX(amount);
+		if (alienBox.getBeginPositionX()<0)
+			alienBox.setBeginPositionX(0);
 	}
+	
+	
 	
 	public void moveRight(int amount){
-		xPosition+=amount;
-		if (xPosition>screenConstants.GAME_SCREEN_WIDTH)
-			xPosition=screenConstants.GAME_SCREEN_WIDTH;
+		alienBox.incrementBeginPositionX(amount);
+		if (alienBox.getBeginPositionX()>screenConstants.GAME_SCREEN_WIDTH)
+			alienBox.setBeginPositionX(screenConstants.GAME_SCREEN_WIDTH);
 	}
-	
 	
 	public void executeCommand(MoveCommand command){
 		switch (command.getDirection()){
@@ -90,6 +84,14 @@ public class Alien {
 			moveLeft(screenConstants.ALIEN_STEP);
 			break;
 		}
+	}
+	
+	public int getXPosition(){
+		return alienBox.beginPositionX;
+	}
+	
+	public int getYPosition(){
+		return alienBox.beginPositionY;
 	}
 	
 }

@@ -9,7 +9,7 @@ public class ScreenConstants {
 
 	Context context;
 	
-	public BoundingBox alienBoudingBox, runButtonBoundingBox;
+	public BoundingBox alienBoudingBox, runButtonBoundingBox, goalBoundingBox, gridBoundingBox;
 	
 	public int SCREEN_WIDTH;
 	public int SCREEN_HEIGHT;
@@ -20,17 +20,23 @@ public class ScreenConstants {
 	public int RUN_BUTTON_Y;
 	public int RUN_BUTTON_WIDTH = 100;
 	public int RUN_BUTTON_HEIGHT = 200;
+
 	
-	public static int ALIEN_INITIAL_POSITION_X = 10;
-	public static int ALIEN_INITIAL_POSITION_Y = 10;
-	public static int ALIEN_WIDTH = 10;
-	public static int ALIEN_HEIGHT = 10;
-	public int ALIEN_STEP = 30;
+	public static int GRID_POSITION_X = 20;
+	public static int GRID_POSITION_Y = 20;
+	public static int GRID_WIDTH = 600;
+	public static int GRID_HEIGHT = 600;
 	
-	public static int GOAL_INITIAL_POSITION_X = 10;
-	public static int GOAL_INITIAL_POSITION_Y = 10;
-	public static int GOAL_WIDTH = 10;
-	public static int GOAL_HEIGHT = 10;
+	public static int ALIEN_INITIAL_POSITION_X = 20;
+	public static int ALIEN_INITIAL_POSITION_Y = 20;
+	public static int ALIEN_WIDTH = 100;
+	public static int ALIEN_HEIGHT = 100;
+	public int ALIEN_STEP = 100;
+	
+	public static int GOAL_POSITION_X = 320;
+	public static int GOAL_POSITION_Y = 320;
+	public static int GOAL_WIDTH = 100;
+	public static int GOAL_HEIGHT = 200;
 	
 	private static ScreenConstants instance = null;
 	
@@ -44,6 +50,9 @@ public class ScreenConstants {
 	public void createBoudingBoxes(){
 		alienBoudingBox = new BoundingBox(ALIEN_INITIAL_POSITION_X, ALIEN_INITIAL_POSITION_Y, ALIEN_WIDTH, ALIEN_HEIGHT);
 		runButtonBoundingBox = new BoundingBox(RUN_BUTTON_X, RUN_BUTTON_Y, RUN_BUTTON_WIDTH, RUN_BUTTON_HEIGHT);
+		goalBoundingBox = new BoundingBox(GOAL_POSITION_X, GOAL_POSITION_Y, GOAL_WIDTH, GOAL_HEIGHT);
+		gridBoundingBox = new BoundingBox(GRID_POSITION_X, GRID_POSITION_Y, GRID_WIDTH, GRID_HEIGHT);
+		
 	}
 	
 	public static ScreenConstants get(Context context){

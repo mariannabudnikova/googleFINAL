@@ -69,7 +69,6 @@ public class MainActivity extends Activity implements SimpleGestureListener{
 		if (command!=null){
 			MoveCommands.getCommands().addCommand(command);
 		}
-		
 		Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
      }
       
