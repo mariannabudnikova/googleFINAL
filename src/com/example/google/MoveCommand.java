@@ -22,6 +22,10 @@ public class MoveCommand {
 		return icon;
 	}
 	
+	public MoveDirection getDirection(){
+		return moveDirection;
+	}
+	
 	private void setIcon(){
 		switch(moveDirection){
 		case UP:

@@ -12,6 +12,12 @@ public class ScreenConstants {
 	public int SCREEN_HEIGHT;
 	public int GAME_SCREEN_WIDTH;
 	public int GAME_SCREEN_HEIGHT;
+	public int RUN_BUTTON_X;
+	public int RUN_BUTTON_Y;
+	public int RUN_BUTTON_WIDTH;
+	public int RUN_BUTTON_HEIGHT;
+	
+	public int ALIEN_STEP = 30;
 	
 	private static ScreenConstants instance = null;
 	
@@ -37,5 +43,9 @@ public class ScreenConstants {
 		SCREEN_HEIGHT = size.y;
 		GAME_SCREEN_WIDTH = SCREEN_WIDTH;
 		GAME_SCREEN_HEIGHT = SCREEN_HEIGHT/2;
+		RUN_BUTTON_X = SCREEN_WIDTH-150;
+		RUN_BUTTON_Y = GAME_SCREEN_HEIGHT;
+		RUN_BUTTON_HEIGHT = 200;
+		RUN_BUTTON_WIDTH = 100;
 	}
 }

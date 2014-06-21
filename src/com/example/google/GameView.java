@@ -8,23 +8,28 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 
 public class GameView extends SurfaceView {
-    private Bitmap bmp;
+    
     private SurfaceHolder holder;
     private GameLoopThread gameLoopThread;
     private int x = 0; 
     Alien alien;
     Context context;
+    ScreenConstants screenConstants;
+    boolean isRunningCommands = false;
    
     public GameView(Context context) {
           super(context);
           this.context = context;
-          gameLoopThread = new GameLoopThread(this);
+          this.screenConstants = ScreenConstants.get(context);
+          gameLoopThread = new GameLoopThread(this, context);
           holder = getHolder();
+          setOnTapListener();
           holder.addCallback(new SurfaceHolder.Callback() {
 
                  @Override
@@ -52,7 +57,7 @@ public class GameView extends SurfaceView {
                  }
           });
           alien = Alien.get(context);
-          bmp = BitmapFactory.decodeResource(getResources(), alien.getIcon());
+          
     }
 
     @Override
@@ -60,11 +65,13 @@ public class GameView extends SurfaceView {
           canvas.drawColor(Color.BLACK);
           drawAlien(canvas);
           drawMoveCommands(canvas);
+          drawRunButton(canvas);
     }
     
     public void drawAlien(Canvas canvas){
         alien = Alien.get(context);
-        canvas.drawBitmap(bmp, alien.xPosition, alien.yPosition, null);
+        Bitmap alienBitmap = BitmapFactory.decodeResource(getResources(), alien.getIcon());
+        canvas.drawBitmap(alienBitmap, alien.xPosition, alien.yPosition, null);
     }
     
     public void drawMoveCommands(Canvas canvas){
@@ -73,9 +80,41 @@ public class GameView extends SurfaceView {
     	while(iter.hasNext()){
     		MoveCommand command = iter.next();
     		Bitmap commandBitmap = BitmapFactory.decodeResource(getResources(), command.getIcon());
-    		canvas.drawBitmap(bmp, 10, ScreenConstants.get(context).GAME_SCREEN_HEIGHT+commandOffset,null);
+    		canvas.drawBitmap(commandBitmap, 10, ScreenConstants.get(context).GAME_SCREEN_HEIGHT+commandOffset,null);
     		commandOffset+=20;
     	}
     	
     }
+    
+    public void drawRunButton(Canvas canvas){
+    	Bitmap runBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+		canvas.drawBitmap(runBitmap, screenConstants.RUN_BUTTON_X, screenConstants.RUN_BUTTON_Y,null);
+    }
+    
+    public void setOnTapListener(){
+        this.setOnTouchListener( new View.OnTouchListener() {
+  
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				int xCoord = (int)event.getX();
+				int yCoord = (int)event.getY();
+				if (isWithinRunButton(xCoord, yCoord)){
+					System.out.println("clicked run button");
+					//run the code snippet
+					isRunningCommands = true;
+				}
+				return false;
+			}
+        });
+    }
+    
+    public boolean isWithinRunButton(int x, int y){
+    	return (x>=screenConstants.RUN_BUTTON_X 
+    			&& x <= screenConstants.RUN_BUTTON_X + screenConstants.RUN_BUTTON_WIDTH
+    			
+    			&& y >= screenConstants.RUN_BUTTON_Y 
+    			&& y <= screenConstants.RUN_BUTTON_Y + screenConstants.RUN_BUTTON_HEIGHT);
+
+    }
+    
 }

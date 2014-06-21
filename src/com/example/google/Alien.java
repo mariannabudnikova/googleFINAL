@@ -77,4 +77,21 @@ public class Alien {
 	}
 	
 	
+	public void executeCommand(MoveCommand command){
+		switch (command.getDirection()){
+		case UP:
+			moveUp(screenConstants.ALIEN_STEP);
+			break;
+		case DOWN:
+			moveDown(screenConstants.ALIEN_STEP);
+			break;
+		case RIGHT:
+			moveRight(screenConstants.ALIEN_STEP);
+			break;
+		case LEFT:
+			moveLeft(screenConstants.ALIEN_STEP);
+			break;
+		}
+	}
+	
 }

@@ -1,14 +1,18 @@
 package com.example.google;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Canvas;
 public class GameLoopThread extends Thread {
     static final long FPS = 10;
     private GameView view;
     private boolean running = false;
+    int currentlyExecutingCommand = 0;
+    Context context;
    
-    public GameLoopThread(GameView view) {
+    public GameLoopThread(GameView view, Context context) {
           this.view = view;
+          this.context = context;
     }
 
     public void setRunning(boolean run) {
@@ -18,7 +22,7 @@ public class GameLoopThread extends Thread {
     @SuppressLint("WrongCall")
 	@Override
     public void run() {
-          long ticksPS = 500 / FPS;
+          long ticksPS = 1000 / FPS;
           long startTime;
           long sleepTime;
           while (running) {
@@ -26,6 +30,9 @@ public class GameLoopThread extends Thread {
                  startTime = System.currentTimeMillis();
                  try {
                         c = view.getHolder().lockCanvas();
+                        if (view.isRunningCommands){
+                        	runNextCommand();
+                        }
                         synchronized (view.getHolder()) {
                                view.onDraw(c);
                         }
@@ -42,5 +49,19 @@ public class GameLoopThread extends Thread {
                                sleep(10);
                  } catch (Exception e) {}
           }
+    }
+    
+    public void runNextCommand(){
+    	MoveCommands commands = MoveCommands.getCommands();
+    	int numberOfCommands = commands.getNumberOfCommands();
+    	if (currentlyExecutingCommand>=numberOfCommands){
+    		view.isRunningCommands = false;
+    		return;
+    	}
+    	MoveCommand command = commands.getMoveCommandAtIndex(currentlyExecutingCommand);
+    	Alien alien = Alien.get(context);
+    	alien.executeCommand(command);
+    	currentlyExecutingCommand ++;
+    	
     }
 }

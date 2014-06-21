@@ -29,4 +29,12 @@ public class MoveCommands {
 		commandsCopy = (LinkedList<MoveCommand>) moveCommands.clone();
 		return commandsCopy.iterator();
 	}
+	
+	public int getNumberOfCommands(){
+		return moveCommands.size();
+	}
+	
+	public MoveCommand getMoveCommandAtIndex(int index){
+		return moveCommands.get(index);
+	}
 }
