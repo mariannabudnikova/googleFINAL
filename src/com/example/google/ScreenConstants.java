@@ -18,25 +18,37 @@ public class ScreenConstants {
 	
 	public int RUN_BUTTON_X;
 	public int RUN_BUTTON_Y;
-	public int RUN_BUTTON_WIDTH = 100;
-	public int RUN_BUTTON_HEIGHT = 200;
+	public int RUN_BUTTON_WIDTH = 260;
+	public int RUN_BUTTON_HEIGHT = 150;
 
 	
-	public static int GRID_POSITION_X = 20;
-	public static int GRID_POSITION_Y = 20;
+	public static int GRID_POSITION_X = 60;
+	public static int GRID_POSITION_Y = 0;
 	public static int GRID_WIDTH = 600;
 	public static int GRID_HEIGHT = 600;
 	
-	public static int ALIEN_INITIAL_POSITION_X = 20;
-	public static int ALIEN_INITIAL_POSITION_Y = 20;
-	public static int ALIEN_WIDTH = 100;
-	public static int ALIEN_HEIGHT = 100;
+	public int COMMAND_BUTTON_WIDTH = 100;
+	public int COMMAND_BUTTON_HEIGHT = 100;
+	
+	public int COMMAND_OFFSET = 0;
+	public int MARGIN = 60;
+	
+	public static int ALIEN_INITIAL_POSITION_X = 60;
+	public static int ALIEN_INITIAL_POSITION_Y = 0;
+	public static int ALIEN_WIDTH = 99;
+	public static int ALIEN_HEIGHT = 99;
 	public int ALIEN_STEP = 100;
 	
-	public static int GOAL_POSITION_X = 320;
-	public static int GOAL_POSITION_Y = 320;
+	public static int GOAL_POSITION_X;
+	public static int GOAL_POSITION_Y;
 	public static int GOAL_WIDTH = 100;
-	public static int GOAL_HEIGHT = 200;
+	public static int GOAL_HEIGHT = 100;
+	
+	
+	public static int VICTORY_SCREEN_POSITION_X;
+	public static int VICTORY_SCREEN_POSITION_Y;
+	public static int VICTORY_SCREEN_WIDTH = 500;
+	public static int VICTORY_SCREEN_HEIGHT = 600;
 	
 	private static ScreenConstants instance = null;
 	
@@ -71,7 +83,13 @@ public class ScreenConstants {
 		SCREEN_HEIGHT = size.y;
 		GAME_SCREEN_WIDTH = SCREEN_WIDTH;
 		GAME_SCREEN_HEIGHT = SCREEN_HEIGHT/2;
-		RUN_BUTTON_X = SCREEN_WIDTH-150;
-		RUN_BUTTON_Y = GAME_SCREEN_HEIGHT;
+		RUN_BUTTON_X = SCREEN_WIDTH - RUN_BUTTON_WIDTH - MARGIN;
+		RUN_BUTTON_Y = GAME_SCREEN_HEIGHT+MARGIN;
+		//GOAL_POSITION_X = GRID_POSITION_X + GRID_WIDTH - GOAL_WIDTH;
+		//GOAL_POSITION_Y = GRID_POSITION_Y + GRID_HEIGHT - GOAL_HEIGHT;
+		GOAL_POSITION_X = 160;
+		GOAL_POSITION_Y = 100;
+		VICTORY_SCREEN_POSITION_X = SCREEN_WIDTH/2 - VICTORY_SCREEN_WIDTH/2;
+		VICTORY_SCREEN_POSITION_Y = SCREEN_HEIGHT/2 - VICTORY_SCREEN_HEIGHT/2;
 	}
 }

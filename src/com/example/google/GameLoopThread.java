@@ -79,9 +79,9 @@ public class GameLoopThread extends Thread {
     public void checkIfWon(){
     	BoundingBox alienBox = Alien.get(context).alienBox;
     	BoundingBox goalBox = ScreenConstants.get(context).goalBoundingBox;
-    	//
+    	
     	if (alienBox.intersectsWithAnotherBox(goalBox)){
-    		
+    		view.gameOver = true;
     	}
     }
 }
