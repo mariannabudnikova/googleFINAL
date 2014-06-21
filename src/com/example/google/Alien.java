@@ -1,9 +1,12 @@
 package com.example.google;
 
+import android.content.Context;
+import android.graphics.Point;
+import android.view.Display;
+import android.view.WindowManager;
+
 public class Alien {
 
-	public int SCREEN_WIDTH = 300;
-	public int SCREEN_HEIGHT = 700;
 	public static int INITIAL_POSITION_X = 10;
 	public static int INITIAL_POSITION_Y = 10;
 	
@@ -12,18 +15,30 @@ public class Alien {
 	
 	int xPosition;
 	int yPosition;
+	
+	ScreenConstants screenConstants;
+	
+	Context context;
 
 	
-	public static Alien get(){
-		if (instance == null)
-			return new Alien(INITIAL_POSITION_X, INITIAL_POSITION_Y);
+	public static Alien get(Context context){
+		if (instance == null){
+			
+			instance = new Alien(INITIAL_POSITION_X, INITIAL_POSITION_Y, context);
+		}
 		return instance;
 	}
 	
-	private Alien (int x, int y){
+	
+
+	
+	private Alien (int x, int y, Context context){
+		this.context = context;
+		screenConstants = ScreenConstants.get(context);
 		xPosition =x;
 		yPosition =y;
 		icon=R.drawable.ic_launcher;
+		
 	}
 	
 	public String toString(){
@@ -45,8 +60,8 @@ public class Alien {
 
 	public void moveDown(int amount){
 		yPosition+=amount;
-		if (yPosition>SCREEN_HEIGHT)
-			yPosition=SCREEN_HEIGHT;
+		if (yPosition>screenConstants.GAME_SCREEN_HEIGHT)
+			yPosition=screenConstants.GAME_SCREEN_HEIGHT;
 	}
 	
 	public void moveLeft(int amount){
@@ -57,8 +72,8 @@ public class Alien {
 	
 	public void moveRight(int amount){
 		xPosition+=amount;
-		if (xPosition>SCREEN_WIDTH)
-			xPosition=SCREEN_WIDTH;
+		if (xPosition>screenConstants.GAME_SCREEN_WIDTH)
+			xPosition=screenConstants.GAME_SCREEN_WIDTH;
 	}
 	
 	

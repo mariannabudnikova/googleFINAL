@@ -9,9 +9,9 @@ public class MoveCommands {
 	
 	private static MoveCommands instance = null;
 	
-	public static MoveCommands get(){
+	public static MoveCommands getCommands(){
 		if (instance==null){
-			return new MoveCommands();
+			instance =  new MoveCommands();
 		}
 		return instance;
 	}
@@ -25,6 +25,8 @@ public class MoveCommands {
 	}
 
 	public Iterator<MoveCommand> getCommandIterator(){
-		return moveCommands.iterator();
+		LinkedList<MoveCommand> commandsCopy = new LinkedList<MoveCommand>();
+		commandsCopy = (LinkedList<MoveCommand>) moveCommands.clone();
+		return commandsCopy.iterator();
 	}
 }

@@ -1,5 +1,6 @@
 package com.example.google;
 
+import com.example.google.MoveCommand.MoveDirection;
 import com.example.google.SimpleGestureFilter.SimpleGestureListener;
 
 import android.app.Activity;
@@ -36,29 +37,39 @@ public class MainActivity extends Activity implements SimpleGestureListener{
      public void onSwipe(int direction) {
 		String str = "";
 		
-		Alien alien = Alien.get();
+		Alien alien = Alien.get(getApplicationContext());
+		
+		MoveCommand command=null;
 		
 		switch (direction) {
 
 		case SimpleGestureFilter.SWIPE_RIGHT:
 			str = "Swipe Right";
-			alien.moveRight(MOVEMENT_AMOUNT);
+			//alien.moveRight(MOVEMENT_AMOUNT);
+			command = new MoveCommand(MoveDirection.RIGHT);
 			System.out.println(alien);
 			break;
 		case SimpleGestureFilter.SWIPE_LEFT:
 			str = "Swipe Left";
-			alien.moveLeft(MOVEMENT_AMOUNT);
+			//alien.moveLeft(MOVEMENT_AMOUNT);
+			command = new MoveCommand(MoveDirection.LEFT);
 			break;
 		case SimpleGestureFilter.SWIPE_DOWN:
 			str = "Swipe Down";
-			alien.moveDown(MOVEMENT_AMOUNT);
+			//alien.moveDown(MOVEMENT_AMOUNT);
+			command = new MoveCommand(MoveDirection.DOWN);
 			break;
 		case SimpleGestureFilter.SWIPE_UP:
 			str = "Swipe Up";
-			alien.moveUp(MOVEMENT_AMOUNT);
+			//alien.moveUp(MOVEMENT_AMOUNT);
+			command = new MoveCommand(MoveDirection.UP);
 			break;
 
 		}
+		if (command!=null){
+			MoveCommands.getCommands().addCommand(command);
+		}
+		
 		Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
      }
       
