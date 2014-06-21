@@ -21,6 +21,7 @@ public class GameView extends SurfaceView {
 	Alien alien;
 	Context context;
 	ScreenConstants screenConstants;
+	boolean gameStarted = false;
 	boolean isRunningCommands = false;
 	boolean gameOver = false;
 
@@ -64,6 +65,11 @@ public class GameView extends SurfaceView {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		canvas.drawColor(Color.BLACK);
+		
+		if (!gameStarted){
+			drawLaunchScreen(canvas);
+			return;
+		}
 		drawGrid(canvas);
 		drawMoveCommands(canvas);
 		drawRunButton(canvas);
@@ -71,6 +77,11 @@ public class GameView extends SurfaceView {
 		drawAlien(canvas);
 		if (gameOver)
 			drawVictoryScreen(canvas);
+	}
+	
+	public void drawLaunchScreen(Canvas canvas){
+		Bitmap launchBitmap = BitmapFactory.decodeResource(getResources(), Icons.LAUNCH_SCREEN);
+		canvas.drawBitmap(launchBitmap, 0, 0, null);
 	}
 
 	public void drawGrid(Canvas canvas) {
@@ -131,6 +142,10 @@ public class GameView extends SurfaceView {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
+				if (!gameStarted){
+					gameStarted = true;
+					return false;
+				}
 				int xCoord = (int) event.getX();
 				int yCoord = (int) event.getY();
 

@@ -33,9 +33,10 @@ public final class R {
         public static final int right_highlight=0x7f020008;
         public static final int run_final=0x7f020009;
         public static final int star_final=0x7f02000a;
-        public static final int up=0x7f02000b;
-        public static final int up_highlight=0x7f02000c;
-        public static final int win_screen=0x7f02000d;
+        public static final int story_screen_purple=0x7f02000b;
+        public static final int up=0x7f02000c;
+        public static final int up_highlight=0x7f02000d;
+        public static final int win_screen=0x7f02000e;
     }
     public static final class id {
         public static final int action_settings=0x7f080004;

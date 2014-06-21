@@ -14,5 +14,6 @@ public class Icons {
 	public static int UP_ICON_HIGHLIGHT = R.drawable.up_highlight;
 	public static int DOWN_ICON_HIGHLIGHT = R.drawable.down_highlight;
 	public static int GAME_OVER = R.drawable.win_screen;
+	public static int LAUNCH_SCREEN = R.drawable.story_screen_purple;
 
 }

@@ -41,8 +41,10 @@ public class MainActivity extends Activity implements SimpleGestureListener{
 		
 		MoveCommand command=null;
 		
+		if (!gameView.gameStarted)
+			return;
+		
 		switch (direction) {
-
 		case SimpleGestureFilter.SWIPE_RIGHT:
 			str = "Swipe Right";
 			//alien.moveRight(MOVEMENT_AMOUNT);
